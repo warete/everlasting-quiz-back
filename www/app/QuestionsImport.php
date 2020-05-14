@@ -125,6 +125,7 @@ class QuestionsImport
 		$questionDb->category_id = 1;
 		$questionDb->text = $questionData['question'];
 		$questionDb->version_hash = $questionData['version_hash'];
+		$questionDb->created = date('Y-m-d H:i:s');
 
 		foreach (array_reverse($questionData['answers']) as $i => $answer)
 		{
