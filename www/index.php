@@ -29,6 +29,15 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
 				});
 			});
 		});
+
+		$r->addRoute('POST', '/question/{id:\d+}/send_answer/', function ($id) {
+			$result = [
+				'status' => null,
+				'data' => null,
+			];
+
+			echo json_encode($result);
+		});
 	});
 });
 
