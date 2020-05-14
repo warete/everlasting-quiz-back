@@ -31,6 +31,6 @@ class CreateCategoriesTable extends AbstractMigration
      */
     public function change()
     {
-		$table = $this->table('categories');
+		$this->table('categories')->create();
     }
 }

@@ -37,6 +37,6 @@ class AddScoresColumnsAdd extends AbstractMigration
 			->addColumn('category_id', 'integer')
 //			->addForeignKey('category_id', 'categories', 'id')
 			->addColumn('score', 'integer', ['default' => 0])
-			->create();
+			->update();
     }
 }

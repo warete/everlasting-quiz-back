@@ -33,6 +33,7 @@ class AddCategoriesColumns extends AbstractMigration
     {
 		$table = $this->table('categories');
 		$table->addColumn('name', 'string')
-			->create();
+			->addColumn('external_id', 'integer')
+			->update();
     }
 }

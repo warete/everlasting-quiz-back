@@ -31,6 +31,6 @@ class CreateQuestionsTable extends AbstractMigration
      */
     public function change()
     {
-		$table = $this->table('questions');
+		$this->table('questions')->create();
     }
 }

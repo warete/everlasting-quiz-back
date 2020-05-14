@@ -31,6 +31,6 @@ class CreateScoresTable extends AbstractMigration
      */
     public function change()
     {
-		$table = $this->table('scores');
+		$this->table('scores')->create();
     }
 }
