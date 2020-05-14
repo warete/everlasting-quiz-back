@@ -2,9 +2,8 @@
     "name": "warete/everlasting-quiz-back",
     "type": "project",
     "require": {
-    },
-    "require-dev": {
-
+        "gabordemooij/redbean": "dev-master",
+        "nikic/fast-route": "^1.3"
     },
     "authors": [
         {
