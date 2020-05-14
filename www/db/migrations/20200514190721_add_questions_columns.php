@@ -39,6 +39,8 @@ class AddQuestionsColumns extends AbstractMigration
 			->addColumn('answer_2', 'string')
 			->addColumn('answer_3', 'string')
 			->addColumn('answer_4', 'string')
+			->addColumn('version_hash', 'string')
+			->addColumn('created', 'datetime')
 			->create();
     }
 }
