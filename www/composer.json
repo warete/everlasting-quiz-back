@@ -11,5 +11,11 @@
             "name": "Egor Borisovsky",
             "email": "egor@intervolga.ru"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app",
+            "Models\\": "models"
+        }
+    }
 }
