@@ -4,6 +4,7 @@ Dotenv\Dotenv::createImmutable(__DIR__)->load();
 return [
 	'paths' => [
 		'migrations' => __DIR__ . '/db/migrations',
+		'seeds' => __DIR__ . '/db/seeds',
 	],
 	'environments' => [
 		'default_database' => 'production',
