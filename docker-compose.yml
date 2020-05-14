@@ -28,7 +28,7 @@ services:
   mysql:
     build: ./mysql
     volumes:
-      - mysql_data:/var/lib/mysql
+      - ./mysql_data:/var/lib/mysql
     environment:
       - MYSQL_USER=bitrix
       - MYSQL_PASSWORD=password

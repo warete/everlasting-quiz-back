@@ -2,3 +2,4 @@
 max_allowed_packet=1024M
 default-time-zone='+03:00'
 sql_mode=
+innodb_use_native_aio=0
