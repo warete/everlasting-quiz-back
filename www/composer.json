@@ -1,0 +1,15 @@
+{
+    "name": "warete/everlasting-quiz-back",
+    "type": "project",
+    "require": {
+    },
+    "require-dev": {
+
+    },
+    "authors": [
+        {
+            "name": "Egor Borisovsky",
+            "email": "egor@intervolga.ru"
+        }
+    ]
+}

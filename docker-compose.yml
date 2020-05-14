@@ -1,0 +1,37 @@
+version: '2'
+volumes:
+  mysql_data:
+services:
+  apache:
+    build: ./apache
+    ports:
+      - 8000:80
+    volumes:
+      - ./www:/var/www/html
+    links:
+      - mysql
+    restart: always
+    ulimits:
+      stack: -1
+    environment:
+      - CRON_INTERVAL_SEC=60
+      - SMTP_MAILHUB=smtp.yandex.ru:465
+      - SMTP_USER=server@pdd-host.ru
+      - SMTP_PASS=password
+      - SMTP_REWRITE_DOMAIN=pdd-host.ru
+      - SMTP_HOSTNAME=www.host.ru
+  composer:
+    image: "composer"
+    volumes:
+        - ./www:/app
+    command: install
+  mysql:
+    build: ./mysql
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_USER=bitrix
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=bitrix
+      - MYSQL_ROOT_PASSWORD=password2
+    restart: always
