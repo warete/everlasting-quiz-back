@@ -3,7 +3,11 @@
     "type": "project",
     "require": {
         "gabordemooij/redbean": "dev-master",
-        "nikic/fast-route": "^1.3"
+        "nikic/fast-route": "^1.3",
+        "robmorgan/phinx": "^0.12.1",
+        "symfony/yaml": "^5.0",
+        "vlucas/phpdotenv": "^4.1",
+        "kitetail/zttp": "^0.6.0"
     },
     "authors": [
         {
