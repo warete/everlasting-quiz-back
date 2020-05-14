@@ -19,18 +19,23 @@ class QuestionsImport
 
 	public static function run()
 	{
-		$questions = static::getQuestionsFromApi();
+		$categories = R::findAll('categories');
+		foreach ($categories as $category)
+		{
+			$questions = static::getQuestionsFromApi(intval($category['external_id']));
 
-		static::addVersionHashesToResult($questions);
+			static::addVersionHashesToResult($questions);
 
-		static::addQuestions($questions);
+			static::addQuestionsForCategory($questions, intval($category['id']));
+		}
 	}
 
 	/**
+	 * @param int $typeId
 	 * @param int $count
 	 * @return array
 	 */
-	protected function getQuestionsFromApi(int $count = 5)
+	protected function getQuestionsFromApi(int $typeId, int $count = 5)
 	{
 		if (!$count)
 		{
@@ -45,7 +50,7 @@ class QuestionsImport
 			try
 			{
 				$response = Zttp::get(static::API_URL, [
-					'qType' => static::DEFAULT_QUESTIONS_TYPE,
+					'qType' => $typeId,
 					'count' => $count <= static::MAX_QUESTIONS_PER_REQUEST ? $count : static::MAX_QUESTIONS_PER_REQUEST,
 				]);
 				if ($response->isOk())
@@ -88,9 +93,10 @@ class QuestionsImport
 
 	/**
 	 * @param array $questions
+	 * @param int $categoryId
 	 * @throws \RedBeanPHP\RedException\SQL
 	 */
-	protected function addQuestions(array $questions)
+	protected function addQuestionsForCategory(array $questions, int $categoryId)
 	{
 		$existedQuestions = static::getExistingQuestions($questions);
 
@@ -99,6 +105,7 @@ class QuestionsImport
 		{
 			if (!array_key_exists($question['version_hash'], $existedQuestions))
 			{
+				$question['category_id'] = $categoryId;
 				$questionId = static::addQuestion($question);
 				if (intval($questionId))
 				{
@@ -121,8 +128,7 @@ class QuestionsImport
 	protected function addQuestion(array $questionData)
 	{
 		$questionDb = R::dispense(QUESTIONS_TABLE);
-		//TODO: поменять на нормальную категорию
-		$questionDb->category_id = 1;
+		$questionDb->category_id = $questionData['category_id'];
 		$questionDb->text = $questionData['question'];
 		$questionDb->version_hash = $questionData['version_hash'];
 		$questionDb->created = date('Y-m-d H:i:s');
